@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 import 'package:provider/provider.dart';
 import 'package:weatherapp/components/divider.dart';
+import 'package:weatherapp/components/weather_info.dart';
 import 'package:weatherapp/utils/extensions.dart';
 import '../components/animated_background.dart';
 import '../components/greeting_header.dart';
@@ -133,38 +134,35 @@ class WeatherScreenState extends State<WeatherScreen> {
                                         mainAxisSpacing: 0,
                                         crossAxisSpacing: 0),
                                     children: [
-                                      _boxItemWidget(
-                                        Icons.wind_power,
-                                        "Wind",
-                                        "${weatherData.wind.speed.toStringAsFixed(1)} m/s",
-                                        "Wind Deg : ${weatherData.wind.deg}°",
+                                      WeatherInfo(
+                                        icon: Icons.wind_power,
+                                        title:"Wind",
+                                        value:"${weatherData.wind.speed.toStringAsFixed(1)} m/s",
                                       ),
-                                      _boxItemWidget(
-                                        Icons.water_drop,
-                                        "Humidity",
-                                        "${weatherData.main.humidity}%",
-                                        "Pressure : ${weatherData.main.pressure} hPa",
+                                      WeatherInfo(
+                                        icon: Icons.water_drop,
+                                        title: "Humidity",
+                                        value: "${weatherData.main.humidity}%",
                                       ),
-                                      _boxItemWidget(
-                                        Icons.cloud,
-                                        "Clouds",
-                                        "${weatherData.clouds.all}%",
-                                        "Visibility : ${weatherData.visibility / 1000} km",
+                                      WeatherInfo(
+                                        icon: Icons.cloud,
+                                        title: "Clouds",
+                                        value: "${weatherData.clouds.all}%",
                                       ),
 
-                                      //Conditional rain and snow
-                                      if (weatherData.rain != null)
-                                        _boxItemWidget(
-                                          Icons.water,
-                                          "Rain",
-                                          "${weatherData.rain?.the1H ?? 0} mm",
-                                        ),
-                                      if (weatherData.snow != null)
-                                        _boxItemWidget(
-                                          Icons.snowing,
-                                          "Snow",
-                                          "${weatherData.snow?.the1H ?? 0} mm",
-                                        ),
+                                      // //Conditional rain and snow
+                                      // if (weatherData.rain != null)
+                                      //   WeatherInfo(
+                                      //     Icons.water,
+                                      //     "Rain",
+                                      //     "${weatherData.rain?.the1H ?? 0} mm",
+                                      //   ),
+                                      // if (weatherData.snow != null)
+                                      //   WeatherInfo(
+                                      //     Icons.snowing,
+                                      //     "Snow",
+                                      //     "${weatherData.snow?.the1H ?? 0} mm",
+                                      //   ),
                                     ]).asGlass(clipBorderRadius: BorderRadius.circular(10))
                               ],
                             ),
@@ -179,33 +177,6 @@ class WeatherScreenState extends State<WeatherScreen> {
           ),
         );
       },
-    );
-  }
-
-  Widget _boxItemWidget(IconData icon, String title, String value,
-      [String? subtitle]) {
-    return Container(
-      color: Colors.black,
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(icon, color: Colors.white, size: 40),
-          const CustomDivider(
-            space: 10,
-            direction: Axis.vertical,
-          ),
-          Expanded(
-              child: Text(value,
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold))),
-          Text(title,
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .copyWith(color: Colors.white))
-        ],
-      ),
     );
   }
 }

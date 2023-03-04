@@ -34,6 +34,18 @@ class CitiesListScreenState extends State<CitiesListScreen> {
               BoxDecoration(gradient: backgroundWeatherTheme().backround),
           child: Scaffold(
             backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Text(
+                'Cities',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
             body: SafeArea(
               child: Container(
                 padding: const EdgeInsets.all(10),

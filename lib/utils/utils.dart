@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 bool get alreadyNight {
   var now = DateTime.now();
   if (now.hour >= 0 && now.hour < 5) return true;
@@ -9,4 +11,10 @@ DateTime? unixToDateTime(int? data) {
   if (data == null) return null;
   final int millis = data * 1000;
   return DateTime.fromMillisecondsSinceEpoch(millis);
+}
+
+String formattedCurrentTime() {
+  var now = DateTime.now();
+  var formatter = DateFormat('EEEE d, y');
+  return formatter.format(now);
 }

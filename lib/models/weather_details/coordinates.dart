@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Coordinates {
   final double latitude;
   final double longitude;

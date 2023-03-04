@@ -1,48 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weatherapp/screens/cities_list_screen.dart';
 import 'package:weatherapp/screens/weather_screen.dart';
 
-class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key? key, required this.title}) : super(key: key);
+import '../providers/navigation_provider.dart';
 
-  final String title;
+class NavigationScreen extends StatefulWidget {
+  const NavigationScreen({Key? key}) : super(key: key);
 
   @override
-  _NavigationScreenState createState() => _NavigationScreenState();
+  NavigationScreenState createState() => NavigationScreenState();
 }
 
-class _NavigationScreenState extends State<NavigationScreen> {
-  int _selectedIndex = 0;
-
+class NavigationScreenState extends State<NavigationScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     const WeatherScreen(),
     const CitiesListScreen(),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    Provider.of<NavigationProvider>(context, listen: false).changeIndex(index);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+    return Consumer<NavigationProvider>(
+      builder: (context, value, child) {
+        var selectedIndex = value.currentIndex;
+
+        return Scaffold(
+          extendBody: true,
+          body: _widgetOptions.elementAt(selectedIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.cyan.withOpacity(0.1),
+            elevation: 0,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.black54,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.sunny),
+                label: 'Weather',
+              ),
+              BottomNavigationBarItem(
+                icon: SizedBox(
+                  height: 24,
+                  child: Icon(Icons.location_city),
+                ),
+                label: 'Cities',
+              ),
+            ],
+            currentIndex: selectedIndex,
+            onTap: _onItemTapped,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+        );
+      },
     );
   }
 }

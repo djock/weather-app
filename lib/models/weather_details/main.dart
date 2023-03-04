@@ -29,16 +29,4 @@ class Main {
     seaLevel: json["sea_level"] ?? 0,
     grndLevel: json["grnd_level"] ?? 0,
   );
-
-  @override
-  Map<String, dynamic> toJson() => {
-    "temp": temp,
-    "feels_like": feelsLike,
-    "temp_min": tempMin,
-    "temp_max": tempMax,
-    "pressure": pressure,
-    "humidity": humidity,
-    "sea_level": seaLevel,
-    "grnd_level": grndLevel,
-  };
 }

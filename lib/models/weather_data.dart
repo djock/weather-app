@@ -6,8 +6,8 @@ import 'package:weatherapp/models/weather_details/sys.dart';
 import 'package:weatherapp/models/weather_details/weather.dart';
 import 'package:weatherapp/models/weather_details/wind.dart';
 
-class WeatherResponse {
-  WeatherResponse({
+class WeatherData {
+  WeatherData({
     required this.coordinates,
     required this.weather,
     required this.main,
@@ -39,7 +39,7 @@ class WeatherResponse {
   String name;
   int cod;
 
-  factory WeatherResponse.fromJson(Map<String, dynamic> json) => WeatherResponse(
+  factory WeatherData.fromJson(Map<String, dynamic> json) => WeatherData(
     coordinates: Coordinates.fromJson(json["coord"]),
     weather: json["weather"] != null ? List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))) : [],
     main: Main.fromJson(json["main"]),

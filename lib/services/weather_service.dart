@@ -1,30 +1,27 @@
-import 'package:weatherapp/models/weather_response.dart';
+import 'package:weatherapp/models/weather_data.dart';
 import 'package:weatherapp/services/api_service.dart';
 
 import '../resources/constants.dart';
 
 class WeatherService extends ApiService {
-  WeatherService(super.context);
+  WeatherService();
 
-  Future<WeatherResponse?> getWeather({
-    String units = "metric",
+  Future<WeatherData?> getWeather({
     required double lat,
     required double lon,
-    String lang = "en",
   }) async {
-    final response = await get("weather", params: {
+    final response = await get("${weatherEndpoint}weather", params: {
       "appid": weatherKey,
       "lat": lat.toString(),
       "lon": lon.toString(),
-      "lang": lang,
+      "lang": 'en',
       "units": "metric",
       "mode": "json",
     });
     if (response != null) {
-      return WeatherResponse.fromJson(response);
+      return WeatherData.fromJson(response);
     } else {
       return null;
     }
   }
-
 }

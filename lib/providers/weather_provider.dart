@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:weatherapp/models/weather_response.dart';
+import 'package:weatherapp/models/weather_data.dart';
 
 import '../resources/constants.dart';
 import '../services/weather_service.dart';
-
 
 ///Location provider for getting current location
 class WeatherProvider extends ChangeNotifier {
   List<double>? _currentLocation;
 
-  WeatherResponse? _weatherResponse;
+  WeatherData? _weatherData;
 
-  WeatherResponse? get weatherResponse => _weatherResponse;
+  WeatherData? get weatherData => _weatherData;
 
-  void initialize(BuildContext context) {
-    fetchCurrentLocation(context);
+  void initialize() {
+    fetchCurrentLocation();
   }
 
   ///Get current location
@@ -29,18 +27,18 @@ class WeatherProvider extends ChangeNotifier {
   }
 
   ///Fetch current location and notify listeners
-  Future fetchCurrentLocation(BuildContext context) async {
+  Future fetchCurrentLocation() async {
     if (await _checkPermission()) {
       Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) => [value.latitude, value.longitude]).then((value) {
         _currentLocation = value;
-        loadWeather(context);
+        loadWeather();
       }).catchError((e) {
-        loadWeather(context);
+        loadWeather();
       });
 
       notifyListeners();
     } else {
-      loadWeather(context);
+      loadWeather();
     }
   }
 
@@ -48,7 +46,6 @@ class WeatherProvider extends ChangeNotifier {
   Future<bool> _checkPermission([bool requested = false]) async {
     var serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      Fluttertoast.showToast(msg: 'Location services are disabled.');
       return false;
     }
 
@@ -64,9 +61,9 @@ class WeatherProvider extends ChangeNotifier {
     }
   }
 
-  void loadWeather(BuildContext context) async {
-    WeatherService(context).getWeather(lat: currentLocation.first, lon: currentLocation.last).then((value) {
-      _weatherResponse = value;
+  void loadWeather() async {
+    WeatherService().getWeather(lat: currentLocation.first, lon: currentLocation.last).then((value) {
+      _weatherData = value;
       notifyListeners();
     });
   }

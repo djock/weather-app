@@ -31,7 +31,7 @@ class CitiesListScreenState extends State<CitiesListScreen> {
         var citiesList = value.cities;
         return Container(
           decoration:
-              BoxDecoration(gradient: backgroundWeatherTheme().backround),
+              BoxDecoration(gradient: backgroundWeatherGradient()),
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
@@ -43,7 +43,7 @@ class CitiesListScreenState extends State<CitiesListScreen> {
                 style: Theme.of(context)
                     .textTheme
                     .headline5!
-                    .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                    .copyWith(color: dynamicTextColor(), fontWeight: FontWeight.bold),
               ),
             ),
             body: SafeArea(
@@ -68,7 +68,7 @@ class CitiesListScreenState extends State<CitiesListScreen> {
                                             .textTheme
                                             .headline6!
                                             .copyWith(
-                                                color: Colors.black,
+                                                color: dynamicTextColor(),
                                                 fontWeight: FontWeight.bold)),
                                     trailing: Checkbox(
                                       activeColor: Colors.black,

@@ -26,7 +26,7 @@ class WeatherScreenState extends State<WeatherScreen> {
         var weatherData = value.weatherData;
         return Container(
           decoration:
-          BoxDecoration(gradient: backgroundWeatherTheme().backround),
+          BoxDecoration(gradient: backgroundWeatherGradient()),
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Stack(
@@ -53,7 +53,7 @@ class WeatherScreenState extends State<WeatherScreen> {
                                         .headline5!
                                         .copyWith(
                                         fontSize: 30,
-                                        color: Colors.black,
+                                        color: dynamicTextColor(),
                                         fontWeight: FontWeight.bold),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -94,7 +94,7 @@ class WeatherScreenState extends State<WeatherScreen> {
                                           .textTheme
                                           .bodyText1!
                                           .copyWith(
-                                          color: Colors.black,
+                                          color: dynamicTextColor(),
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold)),
                                   const CustomDivider(
@@ -107,7 +107,7 @@ class WeatherScreenState extends State<WeatherScreen> {
                                           .textTheme
                                           .headline1!
                                           .copyWith(
-                                          color: Colors.black,
+                                          color: dynamicTextColor(),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 150)),
                                   Text(
@@ -117,7 +117,7 @@ class WeatherScreenState extends State<WeatherScreen> {
                                           .bodyText1!
                                           .copyWith(
                                         fontSize: 18,
-                                        color: Colors.black,
+                                        color: dynamicTextColor(),
                                       )),
                                 ]),
                                 const CustomDivider(

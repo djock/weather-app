@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weatherapp/resources/app_colors.dart';
 
 import '../providers/weather_provider.dart';
 
@@ -20,7 +21,7 @@ class GreetingHeader extends StatelessWidget {
     }
 
     TextStyle textStyle = Theme.of(context).textTheme.headline6!.copyWith(
-        color: Colors.black,
+        color: dynamicTextColor(),
         fontWeight: FontWeight.bold);
 
     return Container(
@@ -50,8 +51,8 @@ class GreetingHeader extends StatelessWidget {
           IconButton(
               onPressed: () => WeatherProvider.read(context)
                   .loadWeather(),
-              icon: const Icon(Icons.refresh,
-                  color: Colors.black)),
+              icon: Icon(Icons.refresh,
+                  color: dynamicTextColor())),
         ],
       ),
     );

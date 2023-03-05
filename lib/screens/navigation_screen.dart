@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weatherapp/resources/app_colors.dart';
 import 'package:weatherapp/screens/cities_list_screen.dart';
 import 'package:weatherapp/screens/weather_screen.dart';
 
@@ -34,8 +35,9 @@ class NavigationScreenState extends State<NavigationScreen> {
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.cyan.withOpacity(0.1),
             elevation: 0,
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black54,
+            selectedItemColor: dynamicTextColor(),
+            unselectedItemColor: dynamicTextColor().withOpacity(0.7),
+            showUnselectedLabels: false,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.sunny),

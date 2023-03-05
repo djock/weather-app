@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 
-import '../resources/app_colors.dart';
 import '../utils/utils.dart';
 
 class AnimatedBackground extends StatelessWidget {
   const AnimatedBackground(
     this.weatherType, {
-    this.weatherTheme,
     Key? key,
   }) : super(key: key);
 
   final WeatherType? weatherType;
-  final ThemeWeather? weatherTheme;
 
   @override
   Widget build(BuildContext context) {
